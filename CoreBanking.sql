@@ -62,29 +62,6 @@ END CREATEACC;
 
 /
 --------------------------------------------------------
---  DDL for Function CREATEACC1
---------------------------------------------------------
-
-  CREATE OR REPLACE FUNCTION "SCOTT"."CREATEACC1" 
-(
-  UNAME IN VARCHAR2 , PIN IN NUMBER
-) RETURN BOOLEAN AS 
-LAST_NUM BANK.acc_no%TYPE;
-OCCURS NUMBER(1);
-BEGIN
-
-    SELECT COUNT(*) INTO OCCURS FROM (SELECT * FROM BANK WHERE USER_NAME = UNAME);
-    IF (OCCURS = 1) THEN
-            RETURN FALSE;
-        END IF;
-    
-    SELECT COUNT(*) INTO LAST_NUM FROM BANK;
-    INSERT INTO BANK VALUES((LAST_NUM+100000), UNAME, PIN, 0);
-    RETURN TRUE;
-END CREATEACC1;
-
-/
---------------------------------------------------------
 --  DDL for Function DEPOSIT
 --------------------------------------------------------
 
@@ -138,7 +115,6 @@ BEGIN
 END WITHDRAWAL;
 
 /
---------------------------------------------------------
 --------------------------------------------------------
 --  Constraints for Table BANK
 --------------------------------------------------------
